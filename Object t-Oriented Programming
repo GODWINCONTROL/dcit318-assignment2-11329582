@@ -1,0 +1,131 @@
+using System;
+
+namespace OOPConceptsDemo
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("ANIMAL SOUND DEMONSTRATION");
+            Console.WriteLine("---------------------------");
+            Animal genericAnimal = new Animal();
+            Animal dog = new Dog();
+            Animal cat = new Cat();
+            
+            genericAnimal.MakeSound();
+            dog.MakeSound();
+            cat.MakeSound();
+
+            Console.WriteLine("\nSHAPE AREA CALCULATION");
+            Console.WriteLine("----------------------");
+            Circle circle = new Circle(5);
+            Rectangle rectangle = new Rectangle(4, 6);
+            
+            Console.WriteLine($"Circle area: {circle.GetArea():F2}");
+            Console.WriteLine($"Rectangle area: {rectangle.GetArea():F2}");
+
+            Console.WriteLine("\nMOVEMENT DEMONSTRATION");
+            Console.WriteLine("-----------------------");
+            IMovable car = new Car();
+            IMovable bicycle = new Bicycle();
+            
+            car.Move();
+            bicycle.Move();
+
+            Console.WriteLine("\nPOLYMORPHISM DEMONSTRATION");
+            Console.WriteLine("--------------------------");
+            Animal[] animals = { new Dog(), new Cat() };
+            foreach (var animal in animals)
+            {
+                animal.MakeSound();
+            }
+
+            Console.WriteLine("\nAll demonstrations completed!");
+        }
+    }
+
+    // INHERITANCE AND METHOD OVERRIDING
+    class Animal
+    {
+        public virtual void MakeSound()
+        {
+            Console.WriteLine("Some generic sound");
+        }
+    }
+
+    class Dog : Animal
+    {
+        public override void MakeSound()
+        {
+            Console.WriteLine("Bark");
+        }
+    }
+
+    class Cat : Animal
+    {
+        public override void MakeSound()
+        {
+            Console.WriteLine("Meow");
+        }
+    }
+
+    // ABSTRACT CLASSES AND METHODS
+    abstract class Shape
+    {
+        public abstract double GetArea();
+    }
+
+    class Circle : Shape
+    {
+        public double Radius { get; }
+
+        public Circle(double radius)
+        {
+            Radius = radius;
+        }
+
+        public override double GetArea()
+        {
+            return Math.PI * Math.Pow(Radius, 2);
+        }
+    }
+
+    class Rectangle : Shape
+    {
+        public double Width { get; }
+        public double Height { get; }
+
+        public Rectangle(double width, double height)
+        {
+            Width = width;
+            Height = height;
+        }
+
+        public override double GetArea()
+        {
+            return Width * Height;
+        }
+    }
+
+    // INTERFACES
+    interface IMovable
+    {
+        void Move();
+    }
+
+    class Car : IMovable
+    {
+        public void Move()
+        {
+            Console.WriteLine("Car is moving");
+        }
+    }
+
+    class Bicycle : IMovable
+    {
+        public void Move()
+        {
+            Console.WriteLine("Bicycle is moving");
+        }
+    }
+}
